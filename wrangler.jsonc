@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "backend-cron-trigger",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-02-24",
+  "triggers": {
+    "crons": [
+      // Runs every 10 minutes:
+      // - 11:00 UTC Mon-Fri -> dispatches peak continuous workflow
+      // - 11:10-13:20 UTC Mon-Fri -> skips (peak continuous loop is already running)
+      // - All other times -> dispatches off-peak single-shot workflow
+      "*/10 * * * *"
+    ]
+  }
+}
